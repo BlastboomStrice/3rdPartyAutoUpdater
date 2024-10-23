@@ -39,7 +39,7 @@ github_fetcher(){
 }
 
 gitlab_openrgb_fetcher(){
-	curl -sL https://gitlab.com/api/v4/projects/$programID/releases/permalink/latest | jq -r '.description' | grep -oE ".*\)" | cut -f2 -d"(" | cut -f1 -d")" | read newUrl
+	curl -sL https://gitlab.com/api/v4/projects/$programID/releases/permalink/latest | jq --arg binaryType "$binaryType" -r '.description' | grep -oE "$binaryType.*\)" | cut -f2 -d"(" | cut -f1 -d")" | read newUrl
 	#We want the link between here:
 	#[Debian Bookworm amd64](https://openrgb.org/releases/release_0.9/openrgb_0.9_amd64_bookworm_b5f46e3.deb)\n\n[Debian Bookworm i386]
 	#Prints text without escape sequences, grabs the line with the link I want, and cuts anything after "(" and before ")"
@@ -95,6 +95,7 @@ downloader(){
 	#download
 	wget -N $newUrl -P "$dpath" #donwloads the file
 	fileName=$(basename "$newUrl") #creates the filename by keeping only anything after the last "/" in the url
+	cat <<< $(jq --arg programName "$programName" --arg fileName "$fileName" -r '(.[] | select (.programName==$programName)).fileName |= $fileName' 3rdPartyAutoUpdaterConf.json) > 3rdPartyAutoUpdaterConf.json	#updates filename of program in Conf file
 	echo "THIS IS THE FILENAME: $fileName" #testing stuff here
 }
 
@@ -102,32 +103,44 @@ downloader(){
 installer(){
 	echo "Installing..."
 	
-	fileExt=$(grep -o ".\{4\}$" $fileName)	#grabs the extension of the file (we mostly care if it is .deb or .zip)
-	
-	if [ "fileExt" = ".deb" ]; then
-		sudo apt install "$dpath$filename"
-		rm -rf $dpath$fileName	#deletes downloaded file after extraction
+	fileExt=$(echo "$fileName" | grep -o ".\{4\}$")	#grabs the extension of the file (we mostly care if it is .deb or .zip)
+	echo "$fileExt file"
+
+	if [ "$fileExt" = ".deb" ]; then
+		echo "Performing apt install"
+		sudo apt install "$dpath$fileName"
+		echo "Deleting downloaded file"
+		rm -f "$dpath$fileName"	#deletes downloaded file after extraction
 	else	#we break the if, because the steps after instruction are the same for the rest of the conditions
-		if [ "fileExt" = ".zip" ]; then
+		if [ "$fileExt" = ".zip" ]; then
 			unzip "$dpath$fileName" -d "$dpath"
 		else	#it's gonna be a tar.* file
 			tar -xvf "$dpath$fileName" -C "$dpath"	#extracts tar
 		fi
+		
+		echo "Clearing $programName Dir"
 		sudo rm -rf "/opt/$programName/"
 		#cleans old installation files
 		
-		rm -rf $dpath$fileName
+		echo "Deleting downloaded file"
+		rm -f "$dpath$fileName"
 		#deletes downloaded file after extraction
 		
+		echo "Creating $programName Dir"
 		sudo mkdir "/opt/$programName/"
 		#creates new programDir
 		
+		echo "Moving extracted files to $programName Dir"
 		sudo mv "$dpath"* "/opt/$programName/"
 		#moves files to /opt/programDir/
 
-		sudo rm -f /usr/bin/$programName	#removes old symlink
-		sudo ln -s /opt/$programName/$programExe /usr/bin/$programName	#custom for each program
-		#creates symlink to bin
+		if [ "$programExe" != "null" ]; then	#as long as the program has an executable file, do
+			echo "Removing old $programName symlink"
+			sudo rm -f /usr/bin/$programName	#removes old symlink
+			echo "Creating new $programName symlink"
+			sudo ln -s /opt/$programName/$programExe /usr/bin/$programName	#custom for each program
+			#creates symlink to bin
+		fi
 	fi
 }
 
@@ -163,7 +176,7 @@ cat 3rdPartyAutoUpdaterConf.json | jq -c '.[]' | cat -n | while read -r i obj; d
 	binaryType="null"		#type of binary to pick from the site #this is what file the jq will search for
 	fileName="null"		#the filename of the downloaded program
 	fileExt="null"		#the extension of the file
-	programExe="null"		#the (relative path to) file in the program folder that launches the program
+	programExe="null"		#the (relative path to) file in the program folder that launches the program, keep "null" if there is none
 	
   fi
 done
