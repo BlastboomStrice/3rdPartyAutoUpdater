@@ -50,7 +50,7 @@ gitlab_openrgb_fetcher(){
 }
 
 gitlab_veloren_fetcher(){
-	curl -sL https://gitlab.com/api/v4/projects/$programID/releases/v0.15.0 | jq --arg binaryType "$binaryType" -r '(.assets.links[] | select(.name==$binaryType)).direct_asset_url' | read newUrl
+	curl -sL https://gitlab.com/api/v4/projects/$programID/releases/permalink/latest | jq --arg binaryType "$binaryType" -r '(.assets.links[] | select(.name==$binaryType)).direct_asset_url' | read newUrl
 }
 
 #FETCHER Picks fetcher
