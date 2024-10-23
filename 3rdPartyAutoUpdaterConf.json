@@ -1,6 +1,6 @@
 [
   {
-    "timestamp": "2024-10-23_00:54:10",
+    "timestamp": "2024-10-23_20:20:36",
     "programName": "null",
     "programID": "null",
     "fetcherType": "null",
@@ -15,7 +15,25 @@
     "fetcherType": "github",
     "binaryType": "linux-x86_64.tar.xz",
     "url": "null",
-    "fileName": "null",
+    "fileName": "SuperTuxKart-1.4-linux-x86_64.tar.xz",
     "programExe": "*/run_game.sh"
+  },
+  {
+    "programName": "OpenRGB",
+    "programID": "10582521",
+    "fetcherType": "gitlab_openrgb",
+    "binaryType": "Debian Bookworm amd64",
+    "url": "null",
+    "fileName": "openrgb_0.9_amd64_bookworm_b5f46e3.deb",
+    "programExe": "null"
+  },
+  {
+    "programName": "Veloren",
+    "programID": "21423598",
+    "fetcherType": "gitlab_veloren",
+    "binaryType": "Linux (x86_64) Client (zip)",
+    "url": "null",
+    "fileName": "linux-client-x86_64.zip",
+    "programDir": "airshipper"
   }
 ]
