@@ -1,0 +1,21 @@
+[
+  {
+    "timestamp": "2024-10-23_00:54:10",
+    "programName": "null",
+    "programID": "null",
+    "fetcherType": "null",
+    "binaryType": "null",
+    "url": "null",
+    "fileName": "null",
+    "programDir": "null"
+  },
+  {
+    "programName": "SuperTuxKart",
+    "programID": "supertuxkart/stk-code",
+    "fetcherType": "github",
+    "binaryType": "linux-x86_64.tar.xz",
+    "url": "null",
+    "fileName": "null",
+    "programExe": "*/run_game.sh"
+  }
+]
