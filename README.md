@@ -8,5 +8,15 @@ Currently updates:
 1. SuperTuxKart
 2. OpenRGB
 3. Veloren
+4. ABDownloadManager
+5. Czkawka
+6. Jellyfin-media-player
+7. LRCGET
+8. Ludusavi
+9. OneTagger
+10. Etcher
+11. Rustic
+12. SiteOne-Crawler
+13. ytDownloader
 
 Happy updating!
