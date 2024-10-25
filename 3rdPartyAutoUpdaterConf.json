@@ -7,7 +7,8 @@
     "binaryType": "null",
     "url": "null",
     "fileName": "null",
-    "programDir": "null"
+    "fileExt": "null",
+    "programExe": "null"
   },
   {
     "programName": "SuperTuxKart",
@@ -16,6 +17,7 @@
     "binaryType": "linux-x86_64.tar.xz",
     "url": "null",
     "fileName": "SuperTuxKart-1.4-linux-x86_64.tar.xz",
+    "fileExt": "tar",
     "programExe": "*/run_game.sh"
   },
   {
@@ -25,6 +27,7 @@
     "binaryType": "Debian Bookworm amd64",
     "url": "null",
     "fileName": "openrgb_0.9_amd64_bookworm_b5f46e3.deb",
+    "fileExt": "deb",
     "programExe": "null"
   },
   {
@@ -34,6 +37,107 @@
     "binaryType": "Linux (x86_64) Client (zip)",
     "url": "null",
     "fileName": "linux-client-x86_64.zip",
+    "fileExt": "zip",
     "programExe": "airshipper"
+  },
+  {
+    "programName": "ABDownloadManager",
+    "programID": "amir1376/ab-download-manager",
+    "fetcherType": "github",
+    "binaryType": "linux.deb",
+    "url": "null",
+    "fileName": "null",
+    "fileExt": "deb",
+    "programExe": "null"
+  },
+  {
+    "programName": "Czkawka",
+    "programID": "qarmin/czkawka",
+    "fetcherType": "github",
+    "binaryType": "linux_czkawka_gui_heif_libraw",
+    "url": "null",
+    "fileName": "null",
+    "fileExt": "null",
+    "programExe": "linux_czkawka_gui_heif_libraw"
+  },
+  {
+    "programName": "Jellyfin-media-player",
+    "programID": "jellyfin/jellyfin-media-player",
+    "fetcherType": "github",
+    "binaryType": "amd64-bookworm.deb",
+    "url": "null",
+    "fileName": "null",
+    "fileExt": "deb",
+    "programExe": "null"
+  },
+  {
+    "programName": "LRCGET",
+    "programID": "tranxuanthang/lrcget",
+    "fetcherType": "github",
+    "binaryType": "amd64.deb",
+    "url": "null",
+    "fileName": "null",
+    "fileExt": "deb",
+    "programExe": "null"
+  },
+  {
+    "programName": "Ludusavi",
+    "programID": "mtkennerly/ludusavi",
+    "fetcherType": "github",
+    "binaryType": "linux.zip",
+    "url": "null",
+    "fileName": "null",
+    "fileExt": "zip",
+    "programExe": "ludusavi"
+  },
+  {
+    "programName": "OneTagger",
+    "programID": "Marekkon5/onetagger",
+    "fetcherType": "github",
+    "binaryType": "linux.tar.gz",
+    "url": "null",
+    "fileName": "null",
+    "fileExt": "tar",
+    "programExe": "onetagger"
+  },
+  {
+    "programName": "Etcher",
+    "programID": "balena-io/etcher",
+    "fetcherType": "github",
+    "binaryType": "amd64.deb",
+    "url": "null",
+    "fileName": "null",
+    "fileExt": "deb",
+    "programExe": "null"
+  },
+  {
+    "programName": "Rustic",
+    "programID": "rustic-rs/rustic",
+    "fetcherType": "github",
+    "binaryType": "x86_64-unknown-linux-gnu.tar.gz",
+    "url": "null",
+    "fileName": "null",
+    "fileExt": "tar",
+    "programExe": "rustic"
+  },
+  {
+    "programName": "SiteOne-Crawler",
+    "programID": "janreges/siteone-crawler-gui",
+    "fetcherType": "github",
+    "binaryType": "x64.*deb",
+    "url": "null",
+    "fileName": "null",
+    "fileExt": "deb",
+    "programExe": "null"
+  },
+  {
+    "programName": "ytDownloader",
+    "programID": "aandrew-me/ytDownloader",
+    "fetcherType": "github",
+    "binaryType": "Linux.deb",
+    "url": "null",
+    "fileName": "null",
+    "fileExt": "deb",
+    "programExe": "null"
   }
 ]
