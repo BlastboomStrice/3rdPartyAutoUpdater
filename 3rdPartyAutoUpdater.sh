@@ -125,9 +125,11 @@ downloader(){
 #NON-DEB-INSTALLER #might need different name if we start fetching AppImages
 non_deb_installer(){
 	echo "Clearing $programName Dir"
-	sudo rm -r "/opt/$programName/"	#it used to be sudo rm -r "/opt/$programName/" but that was a bit more dangerous
-	#cleans old installation files
-
+ 	#if command to prevent accidental deletion of the whole /opt/ dir
+ 	if [ "/opt/$programName/" != "/opt/" ] && [ "/opt/$programName/" != "/opt" ] && [ "/opt/$programName/" != "/opt//" ]; then
+		sudo rm -r "/opt/$programName/"	#it used to be sudo rm -rf "/opt/$programName/" but that was a bit more dangerous
+		#cleans old installation files
+	fi
 	if [ "$fileExt" != "null" ]; then	#as long as the program is not an uncompressed file, do
 		echo "Deleting downloaded file"
 		rm -f "$dpath$fileName"
@@ -195,7 +197,10 @@ installer(){
 	esac
 
 	echo "Cleaning $dpath Dir"
-	rm -rf "$dpath" #removes dir where packages where downloaded
+  	#if command to prevent accidental deletion of the /root dir
+ 	if [ "$dpath" != "//" ] && [ "$dpath" != "/" ] && [ "$dpath" != "*" ] && [ "$dpath" != "" ]; then
+		rm -rf "$dpath" #removes dir where packages where downloaded
+	fi
 }
 
 #VERSION-CHECK
