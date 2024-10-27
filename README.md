@@ -18,5 +18,12 @@ Currently updates:
 11. Rustic
 12. SiteOne-Crawler
 13. ytDownloader
-
+14. Godot
+15. Meshroom
+16. Mindustry
+17. DiscordChatExporter-Gui
+18. Striling-PDF
+19. Blender
+20. Natron
+21. PDFsamBasic
 Happy updating!
