@@ -16,18 +16,20 @@ shopt -s lastpipe	#makes the last part of the pipeline run in the current enviro
 dpath="/tmp/3rdPartyAutoUpdater/"	#path to download and extract stuff
 
 programName="null"	#name of program
-programID="null"		#ID or part of url to match with site api	
+programID="null"	#ID or part of url to match with site api
 url="null"			#url of old version of program
-newUrl="null"			#url of new version of program (gets written to $url after the update)
+newUrl="null"		#url of new version of program (gets written to $url after the update)	#not in .json
 fetcherType="null"	#type of fetcher to use (Github, etc.)
-binaryType="null"		#type of binary to pick from the site #this is what file the jq will search for
+binaryType="null"	#type of binary to pick from the site #this is what file the jq will search for
 fileName="null"		#the filename of the downloaded program
 fileExt="null"		#the extension of the file
-programExe="null"		#the (relative path to) file in the program folder that launches the program
-declare -i programIndex=0	#the index of each object in the .json array
+programExe="null"	#the (relative path to) file in the program folder that launches the program
+declare -i programIndex=0	#the index of each object in the .json array	#not in .json
 
 #INITIALIZE-LOG
 initialize_log(){
+	echo "Please put in your password to start"
+	sudo echo "Thank you, lets goo"	#gets sudo permission for our script so as not to bother the user later when we will use sudo
 	timeStamp=$(date +'%F_%H:%M:%S')	#current timestamp in yyyy-mm-dd_hh:mm:ss format
 	echo "Current timestamp: $timeStamp"
 	cat <<< "$(jq --arg timeStamp "$timeStamp" '(.[] | select (.programName == "null")).timestamp |= $timeStamp' 3rdPartyAutoUpdaterConf.json)" > 3rdPartyAutoUpdaterConf.json #updates timestamp in Conf file
@@ -35,7 +37,6 @@ initialize_log(){
 
 #FETCHERS (some repos needs custom fetchers because they don't follow the standard)
 github_fetcher(){
-
 	curl -s "https://api.github.com/repos/$programID/releases/latest" | jq --arg binaryType "$binaryType" -r '(.assets[] | select(.name)).browser_download_url' | grep -E "$binaryType" | read -r newUrl	#finds the url for the file and writes it to $newUrl
 
 	#the contains() doesn't use regex, so I had to give it up, as one app needed to grep x64.*deb
@@ -54,8 +55,35 @@ gitlab_openrgb_fetcher(){
 }
 
 gitlab_veloren_fetcher(){
-	curl -sL "https://gitlab.com/api/v4/projects/$programID/releases/permalink/latest" | jq --arg binaryType "$binaryType" -r '(.assets.links[] | select(.name==$binaryType)).direct_asset_url' | read  -r newUrl
+	curl -sL "https://gitlab.com/api/v4/projects/$programID/releases/permalink/latest" | jq --arg binaryType "$binaryType" -r '(.assets.links[] | select(.name==$binaryType)).direct_asset_url' | read -r newUrl
 }
+
+site(){
+	echo "If there are any %xx escape characters in the link, the installation will fail"
+	#If there are any %XX escape characters in the link, the installation will fail
+	#We need to implement a Python module urllib.unquote(filename) that will replace %xx escapes by their single-character equivalent.
+	mech-dump --links --absolute --agent-alias='Linux Mozilla' "$programID" | grep -m1 "$binaryType" | read -r newUrl
+}
+
+: <<'END_COMMENT'
+#Decided to use flatpak for Eclipse. The site only provides the installer, not the binary...
+#site_eclipse(){
+#	mech-dump --links --absolute --agent-alias='Linux Mozilla' "$programID" | grep -m1 "$binaryType" | read -r newUrl
+#	newUrl+="&r=1" #adds the mirror redirect to newUrl string to download the file
+#}
+
+json object:
+	{
+		"programName": "EclipseIDE",
+		"programID": "https://www.eclipse.org/downloads/packages/installer",
+		"fetcherType": "site_eclipse",
+		"binaryType": "linux64.tar.gz",
+		"url": "null",
+		"fileName": "null",
+		"fileExt": "tar",
+		"programExe": "null"
+	}
+END_COMMENT
 
 #FETCHER Picks fetcher
 fetcher(){
@@ -68,6 +96,9 @@ fetcher(){
 		;;
 	gitlab_openrgb)
 		gitlab_openrgb_fetcher
+		;;
+	site)
+		site
 		;;
 	*)
 		echo "This type of fetcher does not exist. Implement it or check for typo in fetcherType item in json object of $programName"
@@ -94,7 +125,7 @@ downloader(){
 #NON-DEB-INSTALLER #might need different name if we start fetching AppImages
 non_deb_installer(){
 	echo "Clearing $programName Dir"
-	sudo rm -rf "/opt/$programName/"
+	sudo rm -r "/opt/$programName/"	#it used to be sudo rm -r "/opt/$programName/" but that was a bit more dangerous
 	#cleans old installation files
 
 	if [ "$fileExt" != "null" ]; then	#as long as the program is not an uncompressed file, do
@@ -112,11 +143,18 @@ non_deb_installer(){
 	#moves files to /opt/programDir/
 
 	if [ "$programExe" != "null" ]; then	#as long as the program has an executable file, do
+		if [ "$fileExt" = "jar" ]; then	#in case of jar filExt, we need to add the .jar suffix to our symlink name
+			echo "Removing old $programName.$fileExt symlink"
+			sudo rm -f "/usr/bin/$programName.$fileExt"	#removes old symlink
+			echo "Creating new $programName.$fileExt symlink"
+			sudo ln -s "/opt/$programName/"$programExe "/usr/bin/$programName.$fileExt"
+		fi
 		echo "Removing old $programName symlink"
 		sudo rm -f "/usr/bin/$programName"	#removes old symlink
 		echo "Creating new $programName symlink"
-		sudo ln -s "/opt/$programName/$programExe" "/usr/bin/$programName"	#custom for each program
-		#creates symlink to bin
+		sudo ln -s "/opt/$programName/"$programExe "/usr/bin/$programName"	#custom for each program	#quotes are missing on $programExe ON PURPOSE
+		#creates symlink to bin #$programExe doesn't have quotes because sometimes it starts with "*/" to go inside the 1st single dir
+		#note: Godot programExe is "*", because it is a single file that changes name
 	fi
 }
 
@@ -131,7 +169,8 @@ installer(){
 	case $fileExt in
 	deb)
 		echo "Performing apt install"
-		sudo apt-get -y install "$dpath$fileName" #-y autoinstall dependencies
+		echo "It should work as long as your repo has the necessary dependencies online!"
+		sudo apt-get -y install "$dpath$fileName" #-y auto-install dependencies
 		#echo "Deleting downloaded file"
 		#rm -f "$dpath$fileName"	#deletes downloaded file after extraction
 		;;
@@ -143,6 +182,9 @@ installer(){
 		tar -xvf "$dpath$fileName" -C "$dpath"	#extracts tar
 		non_deb_installer
 		;;
+	jar)
+		non_deb_installer
+		;;
 	null)
 		non_deb_installer
 		;;
@@ -152,8 +194,8 @@ installer(){
 		;;
 	esac
 
-	echo "Cleaning $dpath Dir contents"
-	rm -rf "$dpath/*" #removes dir where packages where downloaded
+	echo "Cleaning $dpath Dir"
+	rm -rf "$dpath" #removes dir where packages where downloaded
 }
 
 #VERSION-CHECK
@@ -201,9 +243,42 @@ cat 3rdPartyAutoUpdaterConf.json | jq -c '.[]' | cat -n | while read -r i obj; d
 	fileName="null"		#the filename of the downloaded program
 	fileExt="null"		#the extension of the file
 	programExe="null"		#the (relative path to) file in the program folder that launches the program, keep "null" if there is none
-	
   fi
 done
 
 #END
 echo "FINISHED"
+
+#I should probably use NixOS or at least Nix package manager instead of inveting the wheel
+
+#LRCGET fails to be installed on debian testing on 2024-27-10 due to unmet dependencies.. "Some packages could not be installed."
+
+#Keyviz fetches the non-alpha version that doesn't have the appropriate file. I remove it from the .json
+#I'm commenting the json object here:
+: <<'END_COMMENT'
+{
+    "programName": "Keyviz",
+    "programID": "mulaRahul/keyviz",
+    "fetcherType": "github",
+    "binaryType": "linux.zip",
+    "url": "null",
+    "fileName": "null",
+    "fileExt": "zip",
+    "programExe": "keyviz"
+  },
+END_COMMENT
+
+#dell-powermanager has a %xx escape characters issue. I remove it from the .json
+#I'm commenting the json object here:
+: <<'END_COMMENT'
+  {
+    "programName": "Dell-powermanager",
+    "programID": "alexVinarskis/dell-powermanager",
+    "fetcherType": "github",
+    "binaryType": "amd64.deb",
+    "url": "null",
+    "fileName": "null",
+    "fileExt": "deb",
+    "programExe": "null"
+  },
+END_COMMENT
