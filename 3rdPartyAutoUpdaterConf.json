@@ -1,6 +1,6 @@
 [
   {
-    "timestamp": "2024-10-23_20:20:36",
+    "timestamp": "2024-10-27_13:19:18",
     "programName": "null",
     "programID": "null",
     "fetcherType": "null",
@@ -15,7 +15,7 @@
     "programID": "supertuxkart/stk-code",
     "fetcherType": "github",
     "binaryType": "linux-x86_64.tar.xz",
-    "url": "null",
+    "url": "https://github.com/supertuxkart/stk-code/releases/download/1.4/SuperTuxKart-1.4-linux-x86_64.tar.xz",
     "fileName": "SuperTuxKart-1.4-linux-x86_64.tar.xz",
     "fileExt": "tar",
     "programExe": "*/run_game.sh"
@@ -25,7 +25,7 @@
     "programID": "10582521",
     "fetcherType": "gitlab_openrgb",
     "binaryType": "Debian Bookworm amd64",
-    "url": "null",
+    "url": "https://openrgb.org/releases/release_0.9/openrgb_0.9_amd64_bookworm_b5f46e3.deb",
     "fileName": "openrgb_0.9_amd64_bookworm_b5f46e3.deb",
     "fileExt": "deb",
     "programExe": "null"
@@ -35,7 +35,7 @@
     "programID": "21423598",
     "fetcherType": "gitlab_veloren",
     "binaryType": "Linux (x86_64) Client (zip)",
-    "url": "null",
+    "url": "https://gitlab.com/veloren/airshipper/-/releases/v0.15.0/downloads/binaries/linux-client-x86_64.zip",
     "fileName": "linux-client-x86_64.zip",
     "fileExt": "zip",
     "programExe": "airshipper"
@@ -45,8 +45,8 @@
     "programID": "amir1376/ab-download-manager",
     "fetcherType": "github",
     "binaryType": "linux.deb",
-    "url": "null",
-    "fileName": "null",
+    "url": "https://github.com/amir1376/ab-download-manager/releases/download/v1.3.0/ABDownloadManager_1.3.0_linux.deb",
+    "fileName": "ABDownloadManager_1.3.0_linux.deb",
     "fileExt": "deb",
     "programExe": "null"
   },
@@ -55,8 +55,8 @@
     "programID": "qarmin/czkawka",
     "fetcherType": "github",
     "binaryType": "linux_czkawka_gui_heif_libraw",
-    "url": "null",
-    "fileName": "null",
+    "url": "https://github.com/qarmin/czkawka/releases/download/8.0.0/linux_czkawka_gui_heif_libraw",
+    "fileName": "linux_czkawka_gui_heif_libraw",
     "fileExt": "null",
     "programExe": "linux_czkawka_gui_heif_libraw"
   },
@@ -65,8 +65,8 @@
     "programID": "jellyfin/jellyfin-media-player",
     "fetcherType": "github",
     "binaryType": "amd64-bookworm.deb",
-    "url": "null",
-    "fileName": "null",
+    "url": "https://github.com/jellyfin/jellyfin-media-player/releases/download/v1.11.1/jellyfin-media-player_1.11.1-1_amd64-bookworm.deb",
+    "fileName": "jellyfin-media-player_1.11.1-1_amd64-bookworm.deb",
     "fileExt": "deb",
     "programExe": "null"
   },
@@ -75,8 +75,8 @@
     "programID": "tranxuanthang/lrcget",
     "fetcherType": "github",
     "binaryType": "amd64.deb",
-    "url": "null",
-    "fileName": "null",
+    "url": "https://github.com/tranxuanthang/lrcget/releases/download/0.5.0/lrcget_0.5.0_amd64.deb",
+    "fileName": "lrcget_0.5.0_amd64.deb",
     "fileExt": "deb",
     "programExe": "null"
   },
@@ -85,8 +85,8 @@
     "programID": "mtkennerly/ludusavi",
     "fetcherType": "github",
     "binaryType": "linux.zip",
-    "url": "null",
-    "fileName": "null",
+    "url": "https://github.com/mtkennerly/ludusavi/releases/download/v0.25.0/ludusavi-v0.25.0-linux.zip",
+    "fileName": "ludusavi-v0.25.0-linux.zip",
     "fileExt": "zip",
     "programExe": "ludusavi"
   },
@@ -95,8 +95,8 @@
     "programID": "Marekkon5/onetagger",
     "fetcherType": "github",
     "binaryType": "linux.tar.gz",
-    "url": "null",
-    "fileName": "null",
+    "url": "https://github.com/Marekkon5/onetagger/releases/download/1.7.0/OneTagger-linux.tar.gz",
+    "fileName": "OneTagger-linux.tar.gz",
     "fileExt": "tar",
     "programExe": "onetagger"
   },
@@ -105,8 +105,8 @@
     "programID": "balena-io/etcher",
     "fetcherType": "github",
     "binaryType": "amd64.deb",
-    "url": "null",
-    "fileName": "null",
+    "url": "https://github.com/balena-io/etcher/releases/download/v1.19.25/balena-etcher_1.19.25_amd64.deb",
+    "fileName": "balena-etcher_1.19.25_amd64.deb",
     "fileExt": "deb",
     "programExe": "null"
   },
@@ -115,8 +115,8 @@
     "programID": "rustic-rs/rustic",
     "fetcherType": "github",
     "binaryType": "x86_64-unknown-linux-gnu.tar.gz",
-    "url": "null",
-    "fileName": "null",
+    "url": "https://github.com/rustic-rs/rustic/releases/download/v0.9.4/rustic-v0.9.4-x86_64-unknown-linux-gnu.tar.gz",
+    "fileName": "rustic-v0.9.4-x86_64-unknown-linux-gnu.tar.gz",
     "fileExt": "tar",
     "programExe": "rustic"
   },
@@ -125,8 +125,8 @@
     "programID": "janreges/siteone-crawler-gui",
     "fetcherType": "github",
     "binaryType": "x64.*deb",
-    "url": "null",
-    "fileName": "null",
+    "url": "https://github.com/janreges/siteone-crawler-gui/releases/download/v1.0.8/SiteOne-Crawler-linux-x64-1.0.8.deb",
+    "fileName": "SiteOne-Crawler-linux-x64-1.0.8.deb",
     "fileExt": "deb",
     "programExe": "null"
   },
@@ -135,8 +135,88 @@
     "programID": "aandrew-me/ytDownloader",
     "fetcherType": "github",
     "binaryType": "Linux.deb",
-    "url": "null",
-    "fileName": "null",
+    "url": "https://github.com/aandrew-me/ytDownloader/releases/download/v3.18.3/YTDownloader_Linux.deb",
+    "fileName": "YTDownloader_Linux.deb",
+    "fileExt": "deb",
+    "programExe": "null"
+  },
+  {
+    "programName": "Godot",
+    "programID": "godotengine/godot",
+    "fetcherType": "github",
+    "binaryType": "stable_linux.x86_64.zip",
+    "url": "https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_64.zip",
+    "fileName": "Godot_v4.3-stable_linux.x86_64.zip",
+    "fileExt": "zip",
+    "programExe": "*"
+  },
+  {
+    "programName": "Meshroom",
+    "programID": "alicevision/Meshroom",
+    "fetcherType": "github",
+    "binaryType": "linux.tar.gz",
+    "url": "https://github.com/alicevision/Meshroom/releases/download/v2023.3.0/Meshroom-2023.3.0-linux.tar.gz",
+    "fileName": "Meshroom-2023.3.0-linux.tar.gz",
+    "fileExt": "tar",
+    "programExe": "*/Meshroom"
+  },
+  {
+    "programName": "Mindustry",
+    "programID": "Anuken/Mindustry",
+    "fetcherType": "github",
+    "binaryType": "Mindustry.jar",
+    "url": "https://github.com/Anuken/Mindustry/releases/download/v146/Mindustry.jar",
+    "fileName": "Mindustry.jar",
+    "fileExt": "jar",
+    "programExe": "Mindustry.jar"
+  },
+  {
+    "programName": "DiscordChatExporter-Gui",
+    "programID": "Tyrrrz/DiscordChatExporter",
+    "fetcherType": "github",
+    "binaryType": "linux-x64.zip",
+    "url": "https://github.com/Tyrrrz/DiscordChatExporter/releases/download/2.43.3/DiscordChatExporter.Cli.linux-x64.zip",
+    "fileName": "DiscordChatExporter.Cli.linux-x64.zip",
+    "fileExt": "zip",
+    "programExe": "DiscordChatExporter"
+  },
+  {
+    "programName": "Stirling-PDF",
+    "programID": "Stirling-Tools/Stirling-PDF",
+    "fetcherType": "github",
+    "binaryType": "Stirling-PDF.jar",
+    "url": "https://github.com/Stirling-Tools/Stirling-PDF/releases/download/v0.30.1/Stirling-PDF.jar",
+    "fileName": "Stirling-PDF.jar",
+    "fileExt": "jar",
+    "programExe": "Stirling-PDF.jar"
+  },
+  {
+    "programName": "blender",
+    "programID": "https://www.blender.org/download/",
+    "fetcherType": "site",
+    "binaryType": "linux-x64.tar.xz",
+    "url": "https://www.blender.org/download/release/Blender4.2/blender-4.2.3-linux-x64.tar.xz/",
+    "fileName": "blender-4.2.3-linux-x64.tar.xz",
+    "fileExt": "tar",
+    "programExe": "*/blender"
+  },
+  {
+    "programName": "Natron",
+    "programID": "NatronGitHub/Natron",
+    "fetcherType": "github",
+    "binaryType": "Linux-x86_64-no-installer.tar.xz",
+    "url": "https://github.com/NatronGitHub/Natron/releases/download/v2.5.0/Natron-2.5.0-Linux-x86_64-no-installer.tar.xz",
+    "fileName": "Natron-2.5.0-Linux-x86_64-no-installer.tar.xz",
+    "fileExt": "tar",
+    "programExe": "*/Natron"
+  },
+  {
+    "programName": "PDFsamBasic",
+    "programID": "torakiki/pdfsam",
+    "fetcherType": "github",
+    "binaryType": "amd64.deb",
+    "url": "https://github.com/torakiki/pdfsam/releases/download/v5.2.8/pdfsam_5.2.8-1_amd64.deb",
+    "fileName": "pdfsam_5.2.8-1_amd64.deb",
     "fileExt": "deb",
     "programExe": "null"
   }
